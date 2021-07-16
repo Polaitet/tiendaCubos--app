@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,14 +13,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // Public urls
 Route::get('/', function () {
     return view('main_page');
-});
+})->name('mainPage');
 
 
 // Private urls
+Route::get('/modify-slider', [App\Http\Controllers\SliderController::class, 'showMainPage'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('showModifySlider');
 
+
+
+// Login
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
