@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 // Public urls
 Route::get('/', function () {
-    return view('welcome');
+    return view('main_page');
 });
 
 
