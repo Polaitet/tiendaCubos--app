@@ -65,20 +65,30 @@
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <?php $firstIteration = true; ?>
+                @foreach($sliderData as $slider)
+                    @if($firstIteration = true)
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->order}}" class="active"></li>
+                        <?php $firstIteration = false; ?>
+                    @else
+                        <li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->order}}"></li>
+                    @endif
+                @endforeach
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://www.dalpa.es/wp-content/uploads/2019/10/banner-8-rubiks-aniversario2.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="https://i.ibb.co/jHMQZNv/Sin-t-tulo-1.png" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="https://i.ibb.co/4pf8z1H/Sin-t-tulo-2.png" alt="Third slide">
-                </div>
+            <?php $firstIteration = true; ?>
+            @foreach($sliderData as $slider)
+                    @if($firstIteration)
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{$slider->url}}" alt="{{$slider->order}}-slide">
+                        </div>
+                        <?php $firstIteration = false; ?>
+                    @else
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="{{$slider->url}}" alt="{{$slider->order}}-slide">
+                        </div>
+                    @endif
+                @endforeach
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

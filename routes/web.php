@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,8 @@ use App\Http\Controllers\SliderController;
 */
 
 // Public urls
-Route::get('/', function () {
-    return view('main_page');
-})->name('mainPage');
+Route::get('/', [App\Http\Controllers\MainController::class, 'showMainPage'])
+    ->name('mainPage');
 
 
 // Private urls

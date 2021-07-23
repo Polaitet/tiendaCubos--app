@@ -17,6 +17,7 @@ class CreateSliderTable extends Migration
             $table->id();
             $table->integer('order');
             $table->string('url');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }
