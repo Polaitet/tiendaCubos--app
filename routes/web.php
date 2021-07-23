@@ -26,6 +26,11 @@ Route::get('/modify-slider', [App\Http\Controllers\SliderController::class, 'sho
     ->middleware('admin')
     ->name('showModifySlider');
 
+Route::post('/modify-slider/add', [App\Http\Controllers\SliderController::class, 'addImgToSlider'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('addImgToSliderPost');
+
 
 
 // Login
