@@ -57,6 +57,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('showModifySlider') }}">Modificar Slider</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('showModifyMenu') }}">Modificar Menu</a>
+                                    </li>
                                 @endif
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

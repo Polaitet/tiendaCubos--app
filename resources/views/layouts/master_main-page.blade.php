@@ -67,7 +67,7 @@
             <ol class="carousel-indicators">
                 <?php $firstIteration = true; ?>
                 @foreach($sliderData as $slider)
-                    @if($firstIteration = true)
+                    @if($firstIteration)
                         <li data-target="#carouselExampleIndicators" data-slide-to="{{$slider->order}}" class="active"></li>
                         <?php $firstIteration = false; ?>
                     @else

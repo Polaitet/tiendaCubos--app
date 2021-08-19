@@ -26,12 +26,25 @@ Route::get('/modify-slider', [App\Http\Controllers\SliderController::class, 'sho
     ->middleware('admin')
     ->name('showModifySlider');
 
+Route::get('/modify-slider/position/add/{id}', [App\Http\Controllers\SliderController::class, 'modifyPositionAdd'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('modifyPositionAdd');
+
+Route::get('/modify-slider/position/sub/{id}', [App\Http\Controllers\SliderController::class, 'modifyPositionSub'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('modifyPositionSub');
+
 Route::post('/modify-slider/add', [App\Http\Controllers\SliderController::class, 'addImgToSlider'])
     ->middleware('auth')
     ->middleware('admin')
     ->name('addImgToSliderPost');
 
-
+Route::get('/modify-menu', [App\Http\Controllers\SliderController::class, 'showModifyMenu'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('showModifyMenu');
 
 // Login
 Auth::routes();
