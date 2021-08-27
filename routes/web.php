@@ -76,6 +76,7 @@ Route::get('/modify-slider/remove/{id}', [App\Http\Controllers\SliderController:
     ->middleware('auth')
     ->middleware('admin')
     ->name('removeSlider');
+
 // Login
 Auth::routes();
 
