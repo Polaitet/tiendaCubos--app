@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProductMainOrder
- * 
+ *
  * @property int $id
  * @property int $productId
  * @property int $order
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Product $product
  *
  * @package App\Models
@@ -40,4 +40,5 @@ class ProductMainOrder extends Model
 	{
 		return $this->belongsTo(Product::class, 'productId');
 	}
+
 }
