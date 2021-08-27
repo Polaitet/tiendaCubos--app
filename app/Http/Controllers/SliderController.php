@@ -37,7 +37,6 @@ class SliderController extends Controller
         $sliderObject = Slider::where('id', '=', $id)->first();
         $sliderObject->order = $sliderObject->order + 1;
         $sliderObject->save();
-
         return redirect(route('showModifySlider'));
     }
 
@@ -47,5 +46,13 @@ class SliderController extends Controller
         $sliderObject->save();
 
         return redirect(route('showModifySlider'));
+    }
+
+    public function removeSlider($id) {
+        $sliderObject = Slider::where('id', '=', $id)->first();
+        $sliderObject->delete();
+
+        return redirect(route('showModifySlider'));
+
     }
 }

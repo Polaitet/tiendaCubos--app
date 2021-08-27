@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menuitem;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 
@@ -20,6 +21,8 @@ class MainController extends Controller
 
     public function showMainPage() {
         $sliderData = Slider::where('active', '=', 1)->orderBy('order')->get();
-        return view('main_page')->with('sliderData', $sliderData);
+        $menuData =  Menuitem::where('active', '=', 1)->orderBy('order')->get();
+        return view('main_page')->with('sliderData', $sliderData)->with('menuData', $menuData);
+
     }
 }

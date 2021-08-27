@@ -47,6 +47,7 @@
             <h1 class="mt-1">Rubiklandia</h1>
         </div>
         <hr>
+        <!--
             <ul class="nav justify-content-center mt-2" style="font-size: 1.6rem">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Cubos</a>
@@ -61,6 +62,15 @@
                     <a class="nav-link" href="#">Modificaciones</a>
                 </li>
             </ul>
+        -->
+        <ul class="nav justify-content-center mt-2" style="font-size: 1.6rem">
+        @foreach($menuData as $menuitem)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route($menuitem->url)}}">{{$menuitem->name}}</a>
+                </li>
+        @endforeach
+        </ul>
+
 
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

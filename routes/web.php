@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,23 +30,52 @@ Route::get('/modify-slider', [App\Http\Controllers\SliderController::class, 'sho
 Route::get('/modify-slider/position/add/{id}', [App\Http\Controllers\SliderController::class, 'modifyPositionAdd'])
     ->middleware('auth')
     ->middleware('admin')
-    ->name('modifyPositionAdd');
+    ->name('modifySliderPositionAdd');
 
-Route::get('/modify-slider/position/sub/{id}', [App\Http\Controllers\SliderController::class, 'modifyPositionSub'])
+Route::get('/modify-slider/position/sub/{id}', [App\Http\Controllers\SliderController::class, 'modifySliderPositionSub'])
     ->middleware('auth')
     ->middleware('admin')
-    ->name('modifyPositionSub');
+    ->name('modifySliderPositionSub');
 
-Route::post('/modify-slider/add', [App\Http\Controllers\SliderController::class, 'addImgToSlider'])
+Route::post('/modify-slider/add', [App\Http\Controllers\SliderController::class, 'addImgToSliderPost'])
     ->middleware('auth')
     ->middleware('admin')
     ->name('addImgToSliderPost');
 
-Route::get('/modify-menu', [App\Http\Controllers\SliderController::class, 'showModifyMenu'])
+Route::get('/modify-menu', [App\Http\Controllers\MenuController::class, 'showModifyMenu'])
     ->middleware('auth')
     ->middleware('admin')
     ->name('showModifyMenu');
 
+Route::get('/modify-slider', [App\Http\Controllers\SliderController::class, 'showMainPage'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('showModifySlider');
+
+Route::post('/modify-menu/add', [App\Http\Controllers\MenuController::class, 'addMenuItem'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('addMenuItemToHomepage');
+
+Route::get('/modify-menu/position/sub/{id}', [App\Http\Controllers\MenuController::class, 'modifyMenuPositionSub'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('modifyMenuPositionSub');
+
+Route::get('/modify-menu/position/add/{id}', [App\Http\Controllers\MenuController::class, 'modifyMenuPositionAdd'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('modifyMenuPositionAdd');
+
+Route::get('/modify-menu/remove/{id}', [App\Http\Controllers\MenuController::class, 'removeMenuItem'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('removeMenuItem');
+
+Route::get('/modify-slider/remove/{id}', [App\Http\Controllers\SliderController::class, 'removeSlider'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('removeSlider');
 // Login
 Auth::routes();
 

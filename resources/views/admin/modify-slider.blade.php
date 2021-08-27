@@ -9,6 +9,21 @@
 
                     <div class="card-body">
                         <button type="button" id="addBtn" class="btn btn-primary">Añadir nueva imagen</button>
+                        <div id="addForm" class="mt-4" style="display: none">
+                            <form action="{{route('addImgToSliderPost')}}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Orden</label>
+                                    <input type="number" class="form-control" name="order" aria-describedby="emailHelp" placeholder="Orden" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">URL</label>
+                                    <input type="text" class="form-control" name="url" placeholder="URL" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Añadir imagen</button>
+                            </form>
+
+                        </div>
                         <table class="table">
                             <thead>
                             <tr>
@@ -24,8 +39,9 @@
                                 <td>{{$slider->url}}</td>
                                 <td>
                                     <div class="row">
-                                        <a href="{{route('modifyPositionAdd', array('id' => $slider->id))}}"><button type="button" class="btn btn-primary mr-1">+</button></a>
-                                        <a href="{{route('modifyPositionSub', array('id' => $slider->id))}}"><button type="button" class="btn btn-secondary">-</button></a>
+                                        <a href="{{route('modifySliderPositionAdd', array('id' => $slider->id))}}"><button type="button" class="btn btn-primary mr-1">+</button></a>
+                                        <a href="{{route('modifySliderPositionSub', array('id' => $slider->id))}}"><button type="button" class="btn btn-secondary mr-1">-</button></a>
+                                        <a href="{{route('removeSlider', array('id' => $slider->id))}}"><button type="button" class="btn btn-danger">x</button></a>
                                     </div>
                                 </td>
 
@@ -33,21 +49,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <div id="addForm" class="mt-4" style="display: none">
-                            <form action="{{route('addImgToSliderPost')}}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Orden</label>
-                                    <input type="number" class="form-control" name="order" aria-describedby="emailHelp" placeholder="Orden">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">URL</label>
-                                    <input type="text" class="form-control" name="url" placeholder="URL">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Añadir imagen</button>
-                            </form>
 
-                        </div>
                     </div>
                 </div>
             </div>
