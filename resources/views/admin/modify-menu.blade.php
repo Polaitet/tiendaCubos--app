@@ -24,7 +24,7 @@
                                     <label for="exampleInputPassword1">Nombre</label>
                                     <input type="text" class="form-control" name="name" placeholder="Nombre" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Añadir menu item</button>
+                            <button type="submit" class="btn btn-primary">Añadir menu item</button>
                             </form>
 
                         </div>

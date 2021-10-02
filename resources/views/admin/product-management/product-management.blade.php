@@ -1,16 +1,20 @@
 @extends('layouts.app')
-
+@section('customMeta')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/dataTables.bootstrap4.min.css') }}"/>
+    <script type="text/javascript" src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+@endsection
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Gestionar Productos</div>
 
                     <div class="card-body">
                         <button type="button" id="addBtn" class="btn btn-primary">Añadir nuevo producto</button>
                         <div id="addForm" class="mt-4" style="display: none">
-                            <form action="{{route('addMenuItemToHomepage')}}" method="post">
+                            <form action="{{route('addProduct')}}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">EAN</label>
@@ -22,7 +26,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Price</label>
-                                    <input type="number" class="form-control" name="price" placeholder="Price" required>
+                                    <input type="number" class="form-control" name="price" step=".01" placeholder="Price" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Stock</label>
@@ -30,11 +34,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Stickers</label>
-                                    <input type="checkbox" class="form-control" name="stickers" placeholder="Stickers" required>
+                                    <input type="checkbox" class="form-control" name="stickers" placeholder="Stickers">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Magnets</label>
-                                    <input type="checkbox" class="form-control" name="magnets" placeholder="Magnets" required>
+                                    <input type="checkbox" class="form-control" name="magnets" placeholder="Magnets">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Dimensions</label>
@@ -46,14 +50,53 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Weight</label>
-                                    <input type="number" class="form-control" name="weight" placeholder="Weight" required>
+                                    <input type="number" class="form-control" name="weight" step=".01" placeholder="Weight" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Añadir</button>
                             </form>
 
                         </div>
-
-
+                        <div class="mt-3">
+                            <table class="table" id="productTable">
+                                <thead>
+                                <tr>
+                                    <th scope="col">EAN</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Sticker</th>
+                                    <th scope="col">Magnet</th>
+                                    <th scope="col">Dimensions</th>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Weight</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($productsData as $products)
+                                    <tr>
+                                        <td>{{$products->EAN}}</td>
+                                        <td>{{$products->name}}</td>
+                                        <td>{{$products->price}}</td>
+                                        <td>{{$products->stock}}</td>
+                                        <td>{{$products->sticker}}</td>
+                                        <td>{{$products->magnet}}</td>
+                                        <td>{{$products->dimensions}}</td>
+                                        <td>{{$products->brand}}</td>
+                                        <td>{{$products->weight}}</td>
+                                        <td>
+                                            <a href="{{route('productPhotoManagement', array('id' => $products->id))}}"><button type="button" class="btn btn-primary mr-1">Photos</button></a>
+                                            <a href="{{route('productEdit', array('id' => $products->id))}}"><button type="button" class="btn btn-primary mr-1">Edit</button></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,5 +106,9 @@
         $('#addBtn').on('click', function () {
             $('#addForm').fadeIn(600);
         })
+
+        $(document).ready( function () {
+            $('#productTable').DataTable();
+        } );
     </script>
 @endsection

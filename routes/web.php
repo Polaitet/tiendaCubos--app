@@ -91,6 +91,60 @@ Route::get('product-management', [App\Http\Controllers\ProductsController::class
     ->middleware('admin')
     ->name('showProductManagement');
 
+Route::post('/product-management/add', [App\Http\Controllers\ProductsController::class, 'addProduct'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('addProduct');
+
+Route::get('/product-management/edit/{id}', [App\Http\Controllers\ProductsController::class, 'productEdit'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('productEdit');
+
+Route::post('/product-management/edit', [App\Http\Controllers\ProductsController::class, 'editProducts'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('editProducts');
+
+
+// Product Photo Management
+Route::get('/product-management/photo-management/{id}', [App\Http\Controllers\ProductsController::class, 'showMainPhotoPage'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('productPhotoManagement');
+
+Route::get('/product-management/photo-management/delete/{id}', [App\Http\Controllers\ProductsController::class, 'deleteProductPhoto'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('deleteProductPhoto');
+
+Route::post('/product-management/photo-management/upload', [App\Http\Controllers\ProductsController::class, 'uploadNewPhoto'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('uploadProductPhoto');
+
+Route::get('/product-management/photo-management/makeMain/{id}', [App\Http\Controllers\ProductsController::class, 'makeMainPhoto'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('makeMainPhoto');
+
+// Product to Home Page
+
+Route::get('/product-management/homepage-management/add/{id}', [App\Http\Controllers\ProductsController::class, 'addProductToHomePage'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('addProductToHomePage');
+
+Route::get('/product-management/homepage-management/remove/{id}', [App\Http\Controllers\ProductsController::class, 'removeProductToHomePage'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('removeProductToHomePage');
+
+Route::post('/product-management/homepage-management/editOrder', [ProductsController::class, 'editOrderProductsHomePage'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('editOrderProductsHomePage');
+
 
 // Auth && Login Management
 Auth::routes();
