@@ -8,7 +8,7 @@
                     <div class="card-header">MODIFICAR MENU</div>
 
                     <div class="card-body">
-                        <button type="button" id="addBtn" class="btn btn-primary">Añadir nueva menu item</button>
+                        <button type="button" id="addBtn" class="btn btn-primary mb-2">Añadir nueva menu item</button>
                         <div id="addForm" class="mt-4" style="display: none">
                             <form action="{{route('addMenuItemToHomepage')}}" method="post">
                                 @csrf

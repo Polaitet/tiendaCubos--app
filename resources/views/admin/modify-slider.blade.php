@@ -8,7 +8,7 @@
                     <div class="card-header">MODIFICAR SLIDER</div>
 
                     <div class="card-body">
-                        <button type="button" id="addBtn" class="btn btn-primary">Añadir nueva imagen</button>
+                        <button type="button" id="addBtn" class="btn btn-primary mb-2">Añadir nueva imagen</button>
                         <div id="addForm" class="mt-4" style="display: none">
                             <form action="{{route('addImgToSliderPost')}}" method="post">
                                 @csrf

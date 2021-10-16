@@ -56,7 +56,15 @@
                                     <label for="exampleFormControlTextarea1">Description</label>
                                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Añadir</button>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Example select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="categoryId">
+                                        @foreach($categoryData as $categoriesSingleData)
+                                            <option value="{{$categoriesSingleData->id}}">{{$categoriesSingleData->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add</button>
                             </form>
 
                         </div>
@@ -73,24 +81,26 @@
                                     <th scope="col">Dimensions</th>
                                     <th scope="col">Brand</th>
                                     <th scope="col">Weight</th>
+                                    <th scope="col">Category</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($productsData as $products)
                                     <tr>
-                                        <td>{{$products->EAN}}</td>
-                                        <td>{{$products->name}}</td>
-                                        <td>{{$products->price}}</td>
-                                        <td>{{$products->stock}}</td>
-                                        <td>{{$products->sticker}}</td>
-                                        <td>{{$products->magnet}}</td>
-                                        <td>{{$products->dimensions}}</td>
-                                        <td>{{$products->brand}}</td>
-                                        <td>{{$products->weight}}</td>
+                                        <td>{{$products->productEAN}}</td>
+                                        <td>{{$products->productName}}</td>
+                                        <td>{{$products->productPrice}}</td>
+                                        <td>{{$products->productStock}}</td>
+                                        <td>{{$products->productSticker}}</td>
+                                        <td>{{$products->productMagnet}}</td>
+                                        <td>{{$products->productDimensions}}</td>
+                                        <td>{{$products->productBrand}}</td>
+                                        <td>{{$products->productWeight}}</td>
+                                        <td>{{$products->categoryName}}</td>
                                         <td>
-                                            <a href="{{route('productPhotoManagement', array('id' => $products->id))}}"><button type="button" class="btn btn-primary mr-1">Photos</button></a>
-                                            <a href="{{route('productEdit', array('id' => $products->id))}}"><button type="button" class="btn btn-primary mr-1">Edit</button></a>
+                                            <a href="{{route('productPhotoManagement', array('id' => $products->productId))}}"><button type="button" class="btn btn-primary mr-1">Photos</button></a>
+                                            <a href="{{route('productEdit', array('id' => $products->productId))}}"><button type="button" class="btn btn-primary mr-1">Edit</button></a>
                                         </td>
                                     </tr>
                                 @endforeach

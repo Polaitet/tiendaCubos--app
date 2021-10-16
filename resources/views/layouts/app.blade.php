@@ -65,6 +65,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('showProductManagement') }}">Gestión de productos</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('showCategoriesManagement') }}">Modify categories</a>
+                                    </li>
                                 @endif
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

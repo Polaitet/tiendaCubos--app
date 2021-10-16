@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property int $productId
- * @property int $name
+ * @property int $categoriesId
  * @property Carbon $created_at
  * 
  * @property Category $category
@@ -29,17 +29,17 @@ class ProductCategory extends Model
 
 	protected $casts = [
 		'productId' => 'int',
-		'name' => 'int'
+		'categoriesId' => 'int'
 	];
 
 	protected $fillable = [
 		'productId',
-		'name'
+		'categoriesId'
 	];
 
 	public function category()
 	{
-		return $this->belongsTo(Category::class, 'name');
+		return $this->belongsTo(Category::class, 'categoriesId');
 	}
 
 	public function product()

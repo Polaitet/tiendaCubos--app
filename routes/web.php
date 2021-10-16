@@ -5,6 +5,8 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\CategoriesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +147,22 @@ Route::post('/product-management/homepage-management/editOrder', [ProductsContro
     ->middleware('admin')
     ->name('editOrderProductsHomePage');
 
+// Categories management
+
+Route::get('/categories-management', [App\Http\Controllers\CategoriesController::class, 'showCategoriesManagement'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('showCategoriesManagement');
+
+Route::post('/categories-management/addNewCategory', [CategoriesController::class, 'addNewCategory'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('addNewCategory');
+
+Route::get('/categories-management/removeCategory/{id}', [App\Http\Controllers\CategoriesController::class, 'removeCategory'])
+    ->middleware('auth')
+    ->middleware('admin')
+    ->name('removeCategory');
 
 // Auth && Login Management
 Auth::routes();

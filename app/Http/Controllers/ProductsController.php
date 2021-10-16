@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\ProductDescription;
 use App\Models\ProductMainOrder;
 use App\Models\ProductsFoto;
@@ -23,14 +25,22 @@ class ProductsController extends Controller
     }
 
     public function showMainPage(){
-        $productsData = Product::all();
+        $productsData = DB::table('products')
+            ->join('product-categories','products.id', '=', 'product-categories.productId')
+            ->join('categories', 'product-categories.categoriesId', '=', 'categories.id')
+            ->select('products.id AS productId', 'products.EAN as productEAN',  'products.name as productName',  'products.price as productPrice'
+                , 'products.stock as productStock', 'products.magnet as productMagnet', 'products.sticker as productSticker', 'products.dimensions as productDimensions'
+                , 'products.brand as productBrand', 'products.weight as productWeight', 'categories.name as categoryName')
+            ->get();
 
-        return view('admin.product-management.product-management')->with('productsData',$productsData);
+        $categories = Category::orderBy('name')->get();
+
+        return view('admin.product-management.product-management')->with('productsData',$productsData)->with('categoryData', $categories);
     }
 
     public function addProduct(Request $request) {
-        $product = new Product();
 
+        $product = new Product();
         $product->EAN = $request->get('ean');
         $product->name = $request->get('name');
         $product->price = $request->get('price');
@@ -46,6 +56,11 @@ class ProductsController extends Controller
         $productDesc->description = $request->get('description');
         $productDesc->productId = Product::max('id');
         $productDesc->save();
+
+        $categoryProduct = new ProductCategory();
+        $categoryProduct->productId = Product::max('id');
+        $categoryProduct->categoriesId = $request->get('categoryId');
+        $categoryProduct->save();
 
         return redirect(route('showProductManagement'));
 
