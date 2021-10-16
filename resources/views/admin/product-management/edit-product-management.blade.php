@@ -65,11 +65,19 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="3"><?php echo htmlspecialchars($descriptionData->description); ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Example select</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="categoryId">
+                                    @foreach($categoryData as $categoriesSingleData)
+                                        <option value="{{$categoriesSingleData->id}}">{{$categoriesSingleData->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="container mb-2">
-                            <button type="submit" class="btn btn-primary">Cambiar</button>
+                            <button type="submit" class="btn btn-primary">Change</button>
                         </div>
                     </form>
                     </div>

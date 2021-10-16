@@ -135,16 +135,20 @@ class ProductsController extends Controller
 
     public function productEdit($id) {
         $product = Product::where('id', '=', $id)->first();
-        $productsOnMainPageData = ProductMainOrder::all();
+        $productsOnMainPageData = ProductMainOrder::all('productId');
         $orderOfProduct = ProductMainOrder::where('productId', '=', $id)->first();
         $idOfProductOnMagePage = array();
+
+        $categories = Category::orderBy('name')->get();
+        $description = ProductDescription::where('productId', '=', $id)->select('description')->first();
 
         foreach ($productsOnMainPageData as $productOnMainPageData) {
             array_push($idOfProductOnMagePage, $productOnMainPageData->productId);
         }
 
         if ($orderOfProduct === null) {
-            return view('admin.product-management.edit-product-management')->with('products', $product)->with('productsOnMainPage', $idOfProductOnMagePage);
+            return view('admin.product-management.edit-product-management')->with('products', $product)->with('productsOnMainPage', $idOfProductOnMagePage)
+                ->with('categoryData', $categories)->with('descriptionData', $description);
         } else {
             $productImages = DB::table('product_main_order')
                 ->join('products_fotos', 'product_main_order.productId', '=', 'products_fotos.productId')
@@ -154,8 +158,9 @@ class ProductsController extends Controller
 
 
             return view('admin.product-management.edit-product-management')->with('products', $product)->with('productsOnMainPage', $idOfProductOnMagePage)
-                ->with('productOrder', $orderOfProduct->order)->with('productImages', $productImages);
+                ->with('productOrder', $orderOfProduct->order)->with('productImages', $productImages)->with('categoryData', $categories)->with('descriptionData', $description);;
         }
+
 
     }
     public function editProducts(Request $request) {
@@ -174,6 +179,10 @@ class ProductsController extends Controller
         $productDesc = ProductDescription::where('productId', '=', $request->id)->first();
         $productDesc->description = $request->get('description');
         $productDesc->save();
+
+        $productCategory = ProductCategory::where('productId', '=', $request->id)->first();
+        $productCategory->categoriesId = $request->get('categoryId');
+        $productCategory->save();
 
 
         return redirect(route('showProductManagement'));
